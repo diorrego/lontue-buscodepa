@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import Image from 'next/image';
 import Joi from 'joi';
+import { motion } from 'framer-motion';
 import { HiUser } from 'react-icons/hi';
 import { HiMail } from 'react-icons/hi';
 
@@ -10,7 +11,6 @@ import Text from '@/components/common/Text';
 
 import useSchemaValidator from '@/hooks/useSchemaValidator';
 import { useFormContext } from '@/providers/FormProvider';
-import { motion } from 'framer-motion';
 
 const Hero = () => {
   const { email, setEmail, name, setName, setStep } = useFormContext();
@@ -50,7 +50,7 @@ const Hero = () => {
 
   return (
     <>
-      <div>
+      <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
         <div className="relative w-full h-[29rem] md:h-[38rem]">
           <div className="absolute inset-0 w-full h-full bg-black/70 z-10 overflow-x-hidden">
             <div className="max-w-6xl mx-auto pt-32 md:pt-52 flex flex-col space-y-2 px-2 md:px-0">
@@ -68,6 +68,7 @@ const Hero = () => {
             alt="Hero Image"
             fill={true}
             style={{ objectFit: 'cover' }}
+            unoptimized
           />
           <div className="absolute inset-x-0 -bottom-24 md:-bottom-12 w-11/12 md:max-w-6xl mx-auto bg-white md:h-24 z-20 rounded-lg shadow-lg shadow-black/40 flex flex-col md:flex-row items-center justify-between space-y-3 md:space-y-0 py-4 md:py-0 md:space-x-4 px-4 md:px-10 overflow-x-hidden">
             <div className="w-full relative">
@@ -130,7 +131,7 @@ const Hero = () => {
             </Button>
           </div>
         </div>
-      </div>
+      </motion.div>
       <div className="max-w-6xl mx-auto pt-40 md:pt-32 flex flex-col space-y-10 pb-20">
         <h2 className="text-center text-3xl font-extrabold">¿Cómo funciona?</h2>
         <div className="flex flex-col md:flex-row items-start justify-between px-2 md:px-0 space-y-16 md:space-y-0 md:space-x-16">
