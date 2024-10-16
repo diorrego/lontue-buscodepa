@@ -1,4 +1,6 @@
+import { useState, useEffect } from 'react';
 import Image from 'next/image';
+import Joi from 'joi';
 import { HiUser } from 'react-icons/hi';
 import { HiMail } from 'react-icons/hi';
 
@@ -6,7 +8,46 @@ import Input from '@/components/common/Input';
 import Button from '@/components/common/Button';
 import Text from '@/components/common/Text';
 
+import useSchemaValidator from '@/hooks/useSchemaValidator';
+import { useFormContext } from '@/providers/FormProvider';
+import { motion } from 'framer-motion';
+
 const Hero = () => {
+  const { email, setEmail, name, setName, setStep } = useFormContext();
+
+  const [showEmailAlertModal, setShowEmailAlertModal] = useState(false);
+  const [showNameAlertModal, setShowNameAlertModal] = useState(false);
+
+  const emailSchema = Joi.string().email({ tlds: { allow: false } });
+  const nameSchema = Joi.string();
+
+  const emailIsValid = useSchemaValidator(emailSchema, email).isValid;
+  const nameIsValid = useSchemaValidator(nameSchema, name).isValid;
+
+  const searchButtonClickHandler = () => {
+    setShowEmailAlertModal(false);
+    setShowNameAlertModal(false);
+
+    if (!emailIsValid || !nameIsValid) {
+      !emailIsValid && setShowEmailAlertModal(true);
+      !nameIsValid && setShowNameAlertModal(true);
+
+      return;
+    }
+
+    setStep((prevState: number) => prevState + 1);
+  };
+
+  useEffect(() => {
+    if (showNameAlertModal) {
+      setTimeout(() => setShowNameAlertModal(false), 3000);
+    }
+
+    if (showEmailAlertModal) {
+      setTimeout(() => setShowEmailAlertModal(false), 3000);
+    }
+  }, [showEmailAlertModal, showNameAlertModal]);
+
   return (
     <>
       <div>
@@ -29,22 +70,61 @@ const Hero = () => {
             style={{ objectFit: 'cover' }}
           />
           <div className="absolute inset-x-0 -bottom-24 md:-bottom-12 w-11/12 md:max-w-6xl mx-auto bg-white md:h-24 z-20 rounded-lg shadow-lg shadow-black/40 flex flex-col md:flex-row items-center justify-between space-y-3 md:space-y-0 py-4 md:py-0 md:space-x-4 px-4 md:px-10 overflow-x-hidden">
-            <Input
-              className="w-full"
-              icon={<HiUser className="text-2xl" />}
-              placeholder="Nombre completo"
-            />
-            <Input
-              className="w-full"
-              icon={<HiMail className="text-2xl" />}
-              placeholder="Correo electrónico"
-            />
+            <div className="w-full relative">
+              <Input
+                className="w-full"
+                icon={<HiUser className="text-2xl" />}
+                placeholder="Nombre completo"
+                name="name"
+                value={name}
+                onChange={(e) => setName((e.target as HTMLInputElement).value)}
+                autoComplete="name"
+              />
+              {showNameAlertModal && (
+                <motion.div
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  className="absolute inset-x-0 -bottom-5 mx-auto bg-red-700 w-fit px-1.5 py-1 rounded-lg z-40"
+                >
+                  <Text className="text-white font-semibold text-center z-40">
+                    Nombre incorrecto
+                  </Text>
+                  <div className="absolute mx-auto inset-x-0 -top-0.5 rotate-45 h-2 w-2 bg-red-700 rounded-sm -z-10" />
+                </motion.div>
+              )}
+            </div>
+            <div className="w-full relative">
+              <Input
+                className="w-full"
+                icon={<HiMail className="text-2xl" />}
+                placeholder="Correo electrónico"
+                value={email}
+                name="email"
+                onChange={(e) =>
+                  setEmail(
+                    (e.target as HTMLInputElement).value
+                      .toLowerCase()
+                      .replace(/\s+/g, '')
+                  )
+                }
+                autoComplete="email"
+              />
+              {showEmailAlertModal && (
+                <motion.div
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  className="absolute inset-x-0 -bottom-5 mx-auto bg-red-700 w-fit px-1.5 py-1 rounded-lg z-40"
+                >
+                  <Text className="text-white font-semibold text-center z-40">
+                    Correo electrónico incorrecto
+                  </Text>
+                  <div className="absolute mx-auto inset-x-0 -top-0.5 rotate-45 h-2 w-2 bg-red-700 rounded-sm -z-10" />
+                </motion.div>
+              )}
+            </div>
             <Button
               className="w-full md:w-[30rem]"
-              onClick={() =>
-                (window.location.href =
-                  'https://88slw36rlj3.typeform.com/to/tDMdigzp')
-              }
+              onClick={searchButtonClickHandler}
             >
               Busca tu Depa ideal
             </Button>

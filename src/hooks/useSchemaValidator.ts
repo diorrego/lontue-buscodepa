@@ -1,16 +1,43 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
+import Joi from 'joi';
 
-const useSchemaValidator = (schema: any, value: any) => {
+const useSchemaValidator = (schema: Joi.Schema, value: any) => {
   const [isValid, setIsValid] = useState(true);
-
-  const { error } = schema.validate(value);
+  const [validationError, setValidationError] =
+    useState<Joi.ValidationError | null>(null);
+  const previousValueRef = useRef<any>();
+  const previousSchemaRef = useRef<Joi.Schema>();
 
   useEffect(() => {
-    if (!error) setIsValid(true);
-    if (error) setIsValid(false);
-  }, [value, schema, error]);
+    const validateSchema = () => {
+      if (
+        value === previousValueRef.current &&
+        schema === previousSchemaRef.current
+      ) {
+        return;
+      }
 
-  return { isValid, error };
+      const { error } = schema.validate(value, { abortEarly: false });
+
+      if (
+        error &&
+        (!validationError || error.message !== validationError.message)
+      ) {
+        setIsValid(false);
+        setValidationError(error);
+      } else if (!error && (validationError || !isValid)) {
+        setIsValid(true);
+        setValidationError(null);
+      }
+
+      previousValueRef.current = value;
+      previousSchemaRef.current = schema;
+    };
+
+    validateSchema();
+  }, [value, schema, validationError, isValid]);
+
+  return { isValid, error: validationError };
 };
 
 export default useSchemaValidator;

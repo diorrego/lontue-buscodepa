@@ -19,10 +19,12 @@ const Button = ({
     px-4
     py-2.5
     ${
-      disabled
-        ? 'bg-neutral-500 text-white'
-        : !variant &&
-          'bg-teal-400 text-teal-950 hover:bg-teal-700 hover:text-teal-200'
+      !variant &&
+      `bg-teal-400 text-teal-950 hover:bg-teal-700 ${
+        disabled
+          ? 'hover:bg-neutral-500 hover:text-white'
+          : 'hover:text-teal-200'
+      }`
     }
     ${
       variant === 'secondary' &&

@@ -1,8 +1,10 @@
 import React from 'react';
 import Head from 'next/head';
 
-import Hero from '@/components/Hero';
 import Layout from '@/components/Layout';
+import Bootstrapper from '@/components/Bootstrapper';
+
+import FormProvider from '@/providers/FormProvider';
 
 export default function Home() {
   return (
@@ -32,7 +34,9 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <Layout>
-        <Hero />
+        <FormProvider>
+          <Bootstrapper />
+        </FormProvider>
       </Layout>
     </>
   );
