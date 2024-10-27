@@ -4,6 +4,7 @@ import Joi from 'joi';
 import { motion } from 'framer-motion';
 import { HiUser } from 'react-icons/hi';
 import { HiMail } from 'react-icons/hi';
+import { useRouter } from 'next/router';
 
 import Input from '@/components/common/Input';
 import Button from '@/components/common/Button';
@@ -13,6 +14,9 @@ import useSchemaValidator from '@/hooks/useSchemaValidator';
 import { useFormContext } from '@/providers/FormProvider';
 
 const Hero = () => {
+  const router = useRouter();
+  const { email: clientEmail } = router.query;
+
   const { email, setEmail, name, setName, setStep } = useFormContext();
 
   const [showEmailAlertModal, setShowEmailAlertModal] = useState(false);
@@ -48,6 +52,11 @@ const Hero = () => {
     }
   }, [showEmailAlertModal, showNameAlertModal]);
 
+  useEffect(() => {
+    if (clientEmail) setEmail(clientEmail);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [clientEmail]);
+
   return (
     <>
       <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
@@ -59,7 +68,7 @@ const Hero = () => {
               </h1>
               <h2 className="text-sm md:text-xl text-center font-semibold text-white mx-auto text-balance text-shadow">
                 Déjanos tus datos, nuestro algoritmo hará el trabajo por ti. Te
-                notificaremos cuando el departamento perfecto esté disponible.
+                notificaremos cuando el Depa perfecto esté disponible.
               </h2>
             </div>
           </div>
@@ -135,30 +144,30 @@ const Hero = () => {
       <div className="max-w-6xl mx-auto pt-40 md:pt-32 flex flex-col space-y-10 pb-20">
         <h2 className="text-center text-3xl font-extrabold">¿Cómo funciona?</h2>
         <div className="flex flex-col md:flex-row items-start justify-between px-2 md:px-0 space-y-16 md:space-y-0 md:space-x-16">
-          <div className="basis-1/3">
+          <div className="basis-1/3 flex flex-col space-y-4 items-center justify-center text-center">
             <div className="bg-gray-400 text-white text-4xl font-extrabold flex items-center justify-center h-14 w-14 rounded-full">
               <p>1</p>
             </div>
-            <Text variant="subtitle" className="mt-4 pl-5 text-balance">
+            <Text variant="subtitle" className="text-balance">
               Inscríbete fácilmente completando un formulario con tus datos.
             </Text>
           </div>
-          <div className="basis-1/3">
+          <div className="basis-1/3 flex flex-col space-y-4 items-center justify-center text-center">
             <div className="bg-gray-400 text-white text-4xl font-extrabold flex items-center justify-center h-14 w-14 rounded-full">
               <p>2</p>
             </div>
-            <Text variant="subtitle" className="mt-4 pl-5 text-balance">
+            <Text variant="subtitle" className="text-balance">
               Te pediremos que respondas una breve pregunta y envíes una selfie
               con quienes vivirás.
             </Text>
           </div>
-          <div className="basis-1/3">
+          <div className="basis-1/3 flex flex-col space-y-4 items-center justify-center text-center">
             <div className="bg-gray-400 text-white text-4xl font-extrabold flex items-center justify-center h-14 w-14 rounded-full">
               <p>3</p>
             </div>
-            <Text variant="subtitle" className="mt-4 pl-5 text-balance">
+            <Text variant="subtitle" className="text-balance">
               Cuando nuestro algoritmo haga el match, listo, ya puedes arrendar
-              el Depa
+              el Depa.
             </Text>
           </div>
         </div>

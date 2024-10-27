@@ -20,7 +20,7 @@ const Button = ({
     py-2.5
     ${
       !variant &&
-      `bg-teal-400 text-teal-950 hover:bg-teal-700 ${
+      `bg-teal-400 text-teal-950 hover:bg-teal-700 shadow-md ${
         disabled
           ? 'hover:bg-neutral-500 hover:text-white'
           : 'hover:text-teal-200'
@@ -29,12 +29,12 @@ const Button = ({
     ${
       variant === 'secondary' &&
       !disabled &&
-      'bg-white border border-gray-300 text-gray-700 hover:bg-gray-200'
+      'bg-white border border-gray-300 text-gray-700 hover:bg-gray-200 shadow-sm'
     }
     ${
       variant === 'danger' &&
       !disabled &&
-      'bg-red-500 text-white hover:bg-red-700'
+      'bg-red-500 text-white hover:bg-red-700 shadow-md'
     }
   `;
 

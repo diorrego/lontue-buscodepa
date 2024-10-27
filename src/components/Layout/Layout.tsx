@@ -5,7 +5,7 @@ import { LayoutProps } from './Layout.interfaces';
 
 const Layout = ({ children }: LayoutProps) => {
   return (
-    <div className="w-screen min-h-screen overflow-x-hidden h-full">
+    <div className="w-screen min-h-screen overflow-x-hidden h-full flex flex-col">
       <nav className="fixed inset-0 top-0 w-full shadow-md shadow-black/20 z-50 bg-white h-fit">
         <div className="max-w-6xl flex flex-row items-center justify-between w-full lg:px-0 mx-auto h-16 px-2">
           <Image

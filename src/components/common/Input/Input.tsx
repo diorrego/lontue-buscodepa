@@ -14,6 +14,7 @@ const Input = ({ className, type = 'text', icon, ...props }: InputProps) => {
     py-2.5
     focus:outline-2
     focus:outline-teal-700
+    focus:bg-gray-100
     placeholder:text-gray-600
     transition-all
     duration-300
