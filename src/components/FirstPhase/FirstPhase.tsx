@@ -67,6 +67,11 @@ const FirstPhase = () => {
     setWhatsapp(value);
   };
 
+  const handleRangeEnd = () => {
+    const roundedBedrooms = Math.round(bedrooms);
+    setBedrooms(roundedBedrooms);
+  };
+
   useEffect(() => {
     window.scrollTo(0, 0);
   }, [phaseStep]);
@@ -107,7 +112,8 @@ const FirstPhase = () => {
             step="0.01"
             value={bedrooms}
             onChange={handleChange}
-            onMouseUp={handleMouseUp}
+            onMouseUp={handleRangeEnd}
+            onTouchEnd={handleRangeEnd}
             className="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer custom-range"
             style={{
               accentColor: 'transparent',
