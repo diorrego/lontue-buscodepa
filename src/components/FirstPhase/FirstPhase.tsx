@@ -143,8 +143,10 @@ const FirstPhase = () => {
             <Text variant="title">
               ¿Cuánto es el presupuesto de arriendo para tu Depa?
             </Text>
-            <Text className={budget === -1 ? 'text-red-500' : ''}>
-              Selecciona un rango de presupuesto.
+            <Text>
+              <span className={budget === -1 ? 'text-red-500' : ''}>
+                Selecciona un rango de presupuesto.
+              </span>
             </Text>
           </div>
           <div className="flex flex-wrap items-center justify-center gap-4">
@@ -244,8 +246,12 @@ const FirstPhase = () => {
               value={whatsapp}
               onChange={handleWhatsappChange}
             />
-            <Text className="text-red-500 h-4">
-              {!whatsappIsValid ? 'Ingrese un número válido de WhatsApp.' : ''}
+            <Text>
+              <span className="text-red-500 h-4">
+                {!whatsappIsValid
+                  ? 'Ingrese un número válido de WhatsApp.'
+                  : ''}
+              </span>
             </Text>
           </div>
           <div className="flex flex-col-reverse md:flex-row md:space-x-4 w-full items-center justify-center">

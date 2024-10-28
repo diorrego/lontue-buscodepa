@@ -7,7 +7,8 @@ const TextArea = ({ className, type = 'text', ...props }: TextAreaProps) => {
   };
 
   const classes = `
-    h-24
+    h-44
+    md:h-24
     border
     border-gray-300
     rounded-lg
