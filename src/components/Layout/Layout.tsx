@@ -17,7 +17,7 @@ const Layout = ({ children }: LayoutProps) => {
           <Image alt="Hero Image" width={80} height={80} src="/lontue.png" />
         </div>
       </nav>
-      {children}
+      <div className="grow">{children}</div>
       <footer className="w-full bg-gray-300 h-full py-10">
         <div className="max-w-6xl flex flex-row items-center justify-between w-full lg:px-0 px-2 mx-auto">
           <Image

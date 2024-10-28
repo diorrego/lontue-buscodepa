@@ -7,20 +7,22 @@ const TextArea = ({ className, type = 'text', ...props }: TextAreaProps) => {
   };
 
   const classes = `
-    h-full
+    h-24
     border
-    border-neutral-500
-    rounded
-    px-2
+    border-gray-300
+    rounded-lg
+    px-3.5
+    py-2.5
     focus:outline-2
-    focus:outline-indigo-600
-    placeholder:text-neutral-600
+    focus:outline-teal-700
+    focus:bg-gray-100
+    placeholder:text-gray-600
     transition-all
     duration-300
-    focus:text-neutral-700
-    dark:text-neutral-600
-    dark:bg-neutral-800
-    dark:focus:bg-neutral-50
+    focus:text-gray-700
+    text-base
+    font-medium
+    bg-gray-300
     
   `;
 

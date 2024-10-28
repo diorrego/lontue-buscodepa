@@ -75,7 +75,7 @@ const FirstPhase = () => {
     <motion.div
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
-      className="grow pt-24 md:pt-52 px-2 md:px-0 text-center mx-auto max-w-[40rem] pb-12"
+      className="pt-24 md:pt-52 px-2 md:px-0 text-center mx-auto max-w-[40rem] pb-12"
     >
       {phaseStep === 1 && (
         <motion.div
@@ -203,7 +203,6 @@ const FirstPhase = () => {
             className="w-full"
             icon={<HiLocationMarker className="text-2xl" />}
             placeholder="Ej.: Concepción, Palomares"
-            name="name"
             value={location}
             onChange={(e) => setLocation((e.target as HTMLInputElement).value)}
           />
@@ -262,7 +261,7 @@ const FirstPhase = () => {
               className="w-full md:w-fit"
               disabled={!whatsappIsValid}
             >
-              Siguiente
+              Inscribirme
             </Button>
           </div>
         </motion.div>
@@ -275,8 +274,8 @@ const FirstPhase = () => {
         >
           <Text variant="title">¡Gracias por inscribirte en buscoDepa.cl!</Text>
           <Text>
-            Revisa tu correo electrónico para confirmar tu inscripción en
-            nuestro sistema.
+            <span className="font-semibold">Revisa tu correo electrónico</span>{' '}
+            para confirmar tu inscripción en nuestro sistema.
           </Text>
         </motion.div>
       )}
