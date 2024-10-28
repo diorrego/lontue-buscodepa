@@ -156,7 +156,7 @@ const SecondPhase = () => {
           </div>
           <TextArea
             className="w-full"
-            placeholder="Ej.: Soy analista contable con contrato indefinido de $1.000.000 líquidos. Viviré con mi pareja y una perrita pequeña. Busco seguridad 24 horas. Me gusta de buscoDepa.cl que con pocos datos inicio el arriendo de un Depa..."
+            placeholder="Ej.: Soy analista contable con contrato indefinido de $1.000.000 líquido. Viviré con mi pareja y una perrita pequeña. Busco seguridad 24 horas. Me gusta de buscoDepa.cl que con pocos datos inicio el arriendo de un Depa..."
             name="name"
             value={description}
             onChange={(e) =>
