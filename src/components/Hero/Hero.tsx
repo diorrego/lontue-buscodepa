@@ -141,7 +141,7 @@ const Hero = () => {
           </div>
         </div>
       </motion.div>
-      <div className="max-w-6xl mx-auto pt-40 md:pt-32 flex flex-col space-y-10 pb-20">
+      <div className="max-w-6xl mx-auto pt-40 md:pt-32 flex flex-col space-y-16 md:space-y-10 pb-20">
         <h2 className="text-center text-3xl font-extrabold">¿Cómo funciona?</h2>
         <div className="flex flex-col md:flex-row items-start justify-between px-2 md:px-0 space-y-16 md:space-y-0 md:space-x-16">
           <div className="basis-1/3 flex flex-col space-y-4 items-center justify-center text-center">
